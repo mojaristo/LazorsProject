@@ -1,20 +1,28 @@
+"""
+test_tracer.py
+Description: Unit tests for the LaserTracer class.
+"""
 import os
 import sys
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from blocks import ReflectBlock, OpaqueBlock, RefractBlock
-from tracer import LaserTracer
+from blocks import ReflectBlock, OpaqueBlock, RefractBlock  # noqa: E402
+from tracer import LaserTracer  # noqa: E402
 
-LASER = [(3, 0, -1, 1)]   # enters a 3x3 board from the top, heading down-left
+# enters a 3x3 board from the top, heading down-left
+LASER = [(3, 0, -1, 1)]
 
 
 def empty_board(rows=3, cols=3):
+    """Return a rows x cols board with no blocks on it."""
     return [[None] * cols for _ in range(rows)]
 
 
 class TestBlockAhead(unittest.TestCase):
+    """Tests for finding which block the laser is about to hit."""
+
     def test_vertical_edge_moving_left(self):
         board = empty_board()
         board[0][0] = ReflectBlock()
@@ -35,6 +43,8 @@ class TestBlockAhead(unittest.TestCase):
 
 
 class TestTrace(unittest.TestCase):
+    """Tests for following the laser across the board."""
+
     def test_empty_board_beam_passes_straight(self):
         visited = LaserTracer(empty_board(), LASER).trace()
         self.assertEqual(visited, {(3, 0), (2, 1), (1, 2), (0, 3)})
@@ -43,7 +53,8 @@ class TestTrace(unittest.TestCase):
         board = empty_board()
         board[0][0] = ReflectBlock()
         visited = LaserTracer(board, LASER).trace()
-        self.assertEqual(visited, {(3, 0), (2, 1), (3, 2), (4, 3), (5, 4), (6, 5)})
+        self.assertEqual(visited,
+                         {(3, 0), (2, 1), (3, 2), (4, 3), (5, 4), (6, 5)})
 
     def test_opaque_block_stops_beam(self):
         board = empty_board()
@@ -62,7 +73,8 @@ class TestTrace(unittest.TestCase):
         self.assertIn((3, 0), LaserTracer(empty_board(), LASER).trace())
 
     def test_laser_starting_off_board_visits_nothing(self):
-        self.assertEqual(LaserTracer(empty_board(), [(20, 20, 1, 1)]).trace(), set())
+        tracer = LaserTracer(empty_board(), [(20, 20, 1, 1)])
+        self.assertEqual(tracer.trace(), set())
 
     def test_multiple_lasers_are_combined(self):
         lasers = [(3, 0, -1, 1), (3, 6, -1, -1)]
@@ -86,11 +98,15 @@ class TestTrace(unittest.TestCase):
 
 
 class TestHitsAll(unittest.TestCase):
+    """Tests for checking that every target point is hit."""
+
     def test_true_when_all_targets_touched(self):
-        self.assertTrue(LaserTracer(empty_board(), LASER).hits_all([(2, 1), (0, 3)]))
+        tracer = LaserTracer(empty_board(), LASER)
+        self.assertTrue(tracer.hits_all([(2, 1), (0, 3)]))
 
     def test_false_when_a_target_is_missed(self):
-        self.assertFalse(LaserTracer(empty_board(), LASER).hits_all([(2, 1), (5, 0)]))
+        tracer = LaserTracer(empty_board(), LASER)
+        self.assertFalse(tracer.hits_all([(2, 1), (5, 0)]))
 
 
 if __name__ == "__main__":
