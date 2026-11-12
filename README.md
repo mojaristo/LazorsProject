@@ -5,7 +5,7 @@ A solver for the Lazors puzzle game. Given a level file (`.bff`), it finds where
 ## Quick start
 
 ```
-python main.py *.bff
+python main.py/*.bff
 ```
 ## The game in brief
 
@@ -31,3 +31,4 @@ solver.py    LazorSolver: searches for a winning block layout (Jayden)
 main.py      LazorGame: command-line entry point              (Jayden)
 tests/       unit tests and sample levels
 ```
+##
