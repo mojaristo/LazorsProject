@@ -7,7 +7,8 @@ A solver for the Lazors puzzle game. Given a level file (`.bff`), it finds where
 ## Quick start
 ### Requirements 
 - Python 3.9 or newer (standard library only, nothing to install)
-- All the project files kept together in one folder: `main.py`, `blocks.py`, `reader.py`, `writer.py`, `tracer.py`, `solver.py`
+- All the project files kept together in one folder: `main.py`, `blocks.py`, `reader.py`, `writer.py`, `tracer.py`, `solver.py`, `your_file_name.bff`
+
 
 ### Running from PyCharm
 1. Open the project folder in PyCharm.
@@ -15,9 +16,15 @@ A solver for the Lazors puzzle game. Given a level file (`.bff`), it finds where
 3. In **Parameters**, enter your file `your_file_name.bff`.
 4. Make sure **Working directory** is the project folder, so the relative path is found.
 5. Click **OK**, then run.
-   
+
+### Running from a terminal
+Run `main.py` and give it the path to a level file (`.bff`):
 ```
-python main.py/*.bff
+python main.py/your_file_name.bff
+```
+### Running the tests
+```
+python -m unittest discover -s tests -v
 ```
 ## The game in brief
 
