@@ -1,0 +1,11 @@
+git add mad_1.bff mad_1_solution.txt# Lazor Game Solution
+# Solved Board Layout:
+GRID START
+o o C o
+o o o A
+A o o o
+o o o o
+GRID STOP
+# Blocks used/placed:
+A 2
+C 1
