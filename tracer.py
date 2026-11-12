@@ -19,7 +19,10 @@ class LaserTracer:
     """
 
     def __init__(self, board, lasers):
-        """board: list of rows of Block or None. lasers: list of (x, y, vx, vy)."""
+        """
+        board: list of rows of Block or None. lasers:
+        list of (x, y, vx, vy).
+        """
         self.board = board
         self.lasers = lasers
 

@@ -3,30 +3,31 @@ test_reader.py
 Author: Kitan Lawal
 Description: Tests for block classes and BoardReader.
 """
+import os
 
 from blocks import ReflectBlock, OpaqueBlock, RefractBlock
 from reader import BoardReader
-import os
+
 
 def test_blocks():
     """Test that our block classes create correctly."""
     r_block = ReflectBlock(fixed=True)
     assert r_block.block_type == 'A'
-    assert r_block.fixed == True
+    assert r_block.fixed
 
     o_block = OpaqueBlock(fixed=False)
     assert o_block.block_type == 'B'
-    assert o_block.fixed == False
+    assert not o_block.fixed
 
     c_block = RefractBlock(fixed=False)
     assert c_block.block_type == 'C'
-    assert c_block.fixed == False
+    assert not c_block.fixed
 
     print("✅ Block tests passed successfully!")
 
 
 def test_board_reader():
-    """Test that our BoardReader can successfully create and read a fake .bff file."""
+    """Test that BoardReader can read a fake .bff file."""
     filename = "test_level.bff"
     test_content = """
 GRID START
@@ -50,9 +51,11 @@ P 2 2
     # Checking that everything was read correctly
     assert data is not None, "The reader returned nothing!"
     assert len(data["grid"]) == 3, "The grid rows count is incorrect!"
-    assert data["available_blocks"] == {'A': 2, 'C': 1}, "The available blocks were parsed incorrectly!"
+    assert data["available_blocks"] == {'A': 2, 'C': 1}, \
+        "The available blocks were parsed incorrectly!"
 
-    if os.path.exists(filename): #cleans up temporary data file
+    # clean up the temporary data file
+    if os.path.exists(filename):
         os.remove(filename)
 
     print("✅ BoardReader test passed successfully!")

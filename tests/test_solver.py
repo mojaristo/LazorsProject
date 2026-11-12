@@ -1,3 +1,7 @@
+"""
+test_solver.py
+Description: Unit tests for LazorSolver and the LazorGame entry point.
+"""
 import os
 import sys
 import tempfile
@@ -6,23 +10,27 @@ import unittest
 HERE = os.path.dirname(__file__)
 sys.path.insert(0, os.path.join(HERE, ".."))
 
-from blocks import Block
-from reader import BoardReader
-from solver import LazorSolver
-from main import LazorGame
+from blocks import Block  # noqa: E402
+from reader import BoardReader  # noqa: E402
+from solver import LazorSolver  # noqa: E402
+from main import LazorGame  # noqa: E402
 
 LEVELS = os.path.join(HERE, "levels")
 
 
 def load(name):
+    """Read a level file from the tests/levels folder."""
     return BoardReader(os.path.join(LEVELS, name)).parse_file()
 
 
 def level(name):
+    """Return a LazorSolver for a level in the tests/levels folder."""
     return LazorSolver(load(name))
 
 
 class TestBuildBoard(unittest.TestCase):
+    """Tests for turning a grid into a board of Block objects."""
+
     def setUp(self):
         grid = [["o", "A"], ["x", "o"]]
         self.solver = LazorSolver({"grid": grid, "available_blocks": {},
@@ -46,6 +54,8 @@ class TestBuildBoard(unittest.TestCase):
 
 
 class TestAssignments(unittest.TestCase):
+    """Tests for generating block placement plans."""
+
     def test_counts_match_combinations(self):
         plans = list(LazorSolver.assignments([("A", 1), ("C", 1)],
                                              [(0, 0), (0, 1), (0, 2)]))
@@ -62,6 +72,8 @@ class TestAssignments(unittest.TestCase):
 
 
 class TestSolve(unittest.TestCase):
+    """Tests for solving whole levels."""
+
     def test_simple_level_is_solved(self):
         solver = level("simple_3x3.bff")
         self.assertIsNotNone(solver.solve())
@@ -102,6 +114,8 @@ class TestSolve(unittest.TestCase):
 
 
 class TestLazorGame(unittest.TestCase):
+    """Tests for running a level from a file and writing the answer."""
+
     def test_run_writes_solution_file(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "level.bff")

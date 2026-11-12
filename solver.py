@@ -51,7 +51,10 @@ class LazorSolver:
 
     @staticmethod
     def assignments(items, free):
-        """Yield every way to put each (type, count) group into distinct cells."""
+        """
+        Yield every way to put each (type, count) group
+        into distinct cells.
+        """
         if not items:
             yield []
             return
