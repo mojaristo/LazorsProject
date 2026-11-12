@@ -1,0 +1,24 @@
+# Example board written for testing (example_6x6_x_cells); solvable by construction
+# x = no block allowed, o = blocks allowed, A/B/C = fixed reflect/opaque/refract
+GRID START
+o o o o B o
+o o o o B o
+o o o o o o
+o o o o o o
+C o o o o o
+o o o x x x
+GRID STOP
+
+A 4
+C 1
+
+# laser: x, y, vx, vy
+L 7 6 1 1
+
+# points the laser must hit
+P 3 12
+P 4 11
+P 5 10
+P 6 9
+P 8 5
+P 8 7
