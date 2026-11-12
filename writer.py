@@ -3,12 +3,18 @@ Author: Kitan
 writer.py
 Description: Saves the solved Lazor board configuration to a text output file.
 """
-
+from pathlib import Path
 
 class SolutionWriter:
     def __init__(self, output_filepath: str):
         """Writes the solved Lazor board layout to a file."""
         self.output_filepath = output_filepath
+
+        output_dir = Path("solutions")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        self.output_filepath = output_dir / output_filepath
+
 
     def save_solution(self, solved_grid: list[list[str]], available_blocks_used: dict):
         """Writes the final solved grid and block placements to a text file."""
