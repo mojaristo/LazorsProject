@@ -51,3 +51,20 @@ class BoardReader:
                 block_type = parts[0]
                 count = int(parts[1])
                 self.available_blocks[block_type] = count
+
+            # parse lasers: L x y vx vy
+            elif parts[0] == "L" and len(parts) == 5:
+                x, y, vx, vy = map(int, parts[1:])
+                self.lasers.append((x, y, vx, vy))
+
+            # parse targets: P x y
+            elif parts[0] == "P" and len(parts) == 3:
+                x, y = map(int, parts[1:])
+                self.targets.append((x, y))
+
+        return {
+            "grid": self.grid,
+            "available_blocks": self.available_blocks,
+            "lasers": self.lasers,
+            "targets": self.targets,
+        }
