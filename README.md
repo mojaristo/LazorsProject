@@ -6,7 +6,7 @@ A solver for the Lazors puzzle game. Given a level file (`.bff`), it finds where
 
 ## Quick start
 ### Requirements 
-- Python 3.9 or newer (standard library only, nothing to install)
+- Python 3.9 or newer 
 - All the project files kept together in one folder: `main.py`, `blocks.py`, `reader.py`, `writer.py`, `tracer.py`, `solver.py`, `your_file_name.bff`
 
 
@@ -21,10 +21,6 @@ A solver for the Lazors puzzle game. Given a level file (`.bff`), it finds where
 Run `main.py` and give it the path to a level file (`.bff`):
 ```
 python main.py/your_file_name.bff
-```
-### Running the tests
-```
-python -m unittest discover -s tests -v
 ```
 ## The game in brief
 
