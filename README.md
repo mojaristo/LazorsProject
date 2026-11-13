@@ -20,7 +20,7 @@ A solver for the Lazors puzzle game. Given a level file (`.bff`), it finds where
 ### Running from a terminal
 Run `main.py` and give it the path to a level file (`.bff`):
 ```
-python main.py/your_file_name.bff
+python main.py your_file_name.bff
 ```
 ## The game in brief
 
@@ -124,10 +124,10 @@ If nothing works, the board is left as it started and `solve()` returns `None`.
 
 ### 6. Writing
 
-`LazorGame.run()` converts the board back to strings (keeping `o` and `x` from the input) and hands it to `SolutionWriter`, which saves it to `<level>_solution.txt`.
+`LazorGame.run()` converts the board back to strings (keeping `o` and `x` from the input) and hands it to `SolutionWriter`, which saves it to `<your_file_name>_solution.txt`.
 
 ## Tests
 
-`tests/test_tracer.py` covers beam behaviour: empty boards, each block type, multiple lasers, start points, and that blocks placed after the tracer is created are noticed. `tests/test_solver.py` covers board building, arrangement generation, solving (including an unsolvable level), and the full `LazorGame` run. Sample levels are in `tests/levels/`.
+`tests/test_tracer.py` covers beam behaviour: empty boards, each block type, multiple lasers, start points, and that blocks placed after the tracer is created are noticed. `tests/test_solver.py` covers board building, arrangement generation, solving (including an unsolvable level), and the full `LazorGame` run. 
 
 
